@@ -1,0 +1,18 @@
+<div class="container">
+  <h2>Login</h2>
+  <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+    <input type="text" id="username" name="username" [(ngModel)]="username" class="input-field" placeholder="Usuário" required>
+    <br />
+    <input type="password" id="password" name="password" [(ngModel)]="password" class="input-field" placeholder="Senha" required>
+    <br />
+    <a href="#" class="forgot-password">Esqueceu sua senha?</a>
+    <br /><br />
+    <div class="button-group">
+      <button type="submit">Entrar</button>
+      <button type="button" (click)="navigate()">Registrar</button>
+    </div>
+    <div *ngIf="loginForm.submitted && loginError" class="error">
+      Usuário ou senha incorreto.
+    </div>
+  </form>
+</div>

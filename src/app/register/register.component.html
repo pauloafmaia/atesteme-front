@@ -1,0 +1,158 @@
+<form #f="ngForm" (ngSubmit)="submitForm(f)">
+  <div class="container">
+    <h2>Registrar</h2>
+    <div
+      class="form-group"
+      [ngClass]="{'invalid': f.submitted && f.controls['username'].errors?.['required']}"
+    >
+      <input
+        type="text"
+        class="input-field"
+        id="username"
+        name="username"
+        [(ngModel)]="user.username"
+        ngModel
+        #username="ngModel"
+        required
+        placeholder="Usuário"
+      />
+      <div
+        *ngIf="f.submitted && f.controls['username'].errors?.['required']"
+        class="error-message"
+      >
+        Usuário é obrigatório.
+      </div>
+    </div>
+
+    <div
+      class="form-group"
+      [ngClass]="{'invalid': f.submitted && f.controls['password'].errors?.['required']}"
+    >
+      <input
+        type="password"
+        class="input-field"
+        id="password"
+        name="password"
+        [(ngModel)]="user.password"
+        ngModel
+        #password="ngModel"
+        required
+        placeholder="Senha"
+        (ngModelChange)="validatePassword()"
+      />
+      <div
+        *ngIf="f.submitted && f.controls['password'].errors?.['required']"
+        class="error-message"
+      >
+        Senha é obrigatória.
+      </div>
+      <div
+        *ngIf="f.submitted && !passwordValidations.lowercase"
+        class="error-message"
+      >
+        Senha deve conter pelo menos uma letra minúscula.
+      </div>
+      <div
+        *ngIf="f.submitted && !passwordValidations.uppercase"
+        class="error-message"
+      >
+        Senha deve conter pelo menos uma letra maiúscula.
+      </div>
+      <div
+        *ngIf="f.submitted && !passwordValidations.number"
+        class="error-message"
+      >
+        Senha deve conter pelo menos um número.
+      </div>
+      <div
+        *ngIf="f.submitted && !passwordValidations.length"
+        class="error-message"
+      >
+        Senha deve ter pelo menos 8 caracteres.
+      </div>
+    </div>
+
+    <div
+      class="form-group"
+      [ngClass]="{'invalid': f.submitted && f.controls['username'].errors?.['required']}"
+    >
+      <input
+        type="text"
+        class="input-field"
+        id="cep"
+        name="cep"
+        ngModel
+        required
+        placeholder="CEP"
+        (blur)="consultaCep(f.value.cep, f)"
+      />
+      <div
+        *ngIf="f.submitted && f.controls['username'].errors?.['required']"
+        class="error-message"
+      >
+        CEP é obrigatório.
+      </div>
+    </div>
+    <input
+      type="text"
+      class="input-field"
+      id="logradouro"
+      name="logradouro"
+      ngModel
+      placeholder="Logradouro"
+    />
+    <div style="display: flex; justify-content: space-between">
+      <input
+        type="text"
+        class="input-field"
+        id="numero"
+        name="numero"
+        ngModel
+        placeholder="Número"
+        style="width: calc(60% - 5px)"
+      />
+      <input
+        type="text"
+        class="input-field"
+        id="complemento"
+        name="complemento"
+        ngModel
+        placeholder="Complemento"
+        style="width: calc(38% - 5px)"
+      />
+    </div>
+    <input
+      type="text"
+      class="input-field"
+      id="bairro"
+      name="bairro"
+      ngModel
+      placeholder="Bairro"
+    />
+    <div style="display: flex; justify-content: space-between">
+      <input
+        type="text"
+        class="input-field"
+        id="cidade"
+        name="cidade"
+        ngModel
+        placeholder="Cidade"
+        style="width: calc(60% - 5px)"
+      />
+      <input
+        type="text"
+        class="input-field"
+        id="uf"
+        name="uf"
+        ngModel
+        placeholder="UF"
+        style="width: calc(38% - 5px)"
+      />
+    </div>
+    <br />
+    <div class="button-group">
+      <button type="submit">Registrar</button>
+      <button type="button" (click)="navigate()">Voltar</button>
+    </div>
+  </div>
+</form>
